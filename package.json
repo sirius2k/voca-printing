@@ -1,0 +1,22 @@
+{
+  "name": "voca-printing",
+  "version": "1.0.0",
+  "description": "This is a simple express+vue project to print vocabulary testing.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sirius2k/voca-printing.git"
+  },
+  "author": "Kyoungwook Park",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sirius2k/voca-printing/issues"
+  },
+  "homepage": "https://github.com/sirius2k/voca-printing#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
