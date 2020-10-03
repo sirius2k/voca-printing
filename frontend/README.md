@@ -1,6 +1,6 @@
 # voca-printing-frontend
 
-> Simple frontend project for the voca-printing
+> A simple frontend project for Voca Printing
 
 ## Build Setup
 
