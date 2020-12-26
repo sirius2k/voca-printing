@@ -1,32 +1,47 @@
 <template lang="html">
   <div class="container">
     <div class="card-deck mb-3 text-center">
-        <card v-bind:printMode="printMode" v-bind:resetTrigger="resetTrigger"></card>
-        <card v-bind:printMode="printMode" v-bind:resetTrigger="resetTrigger"></card>
+      <card v-bind:printMode="printMode" v-bind:resetTrigger="resetTrigger" v-bind:borderClass="borderClass"></card>
+      <card v-bind:printMode="printMode" v-bind:resetTrigger="resetTrigger" v-bind:borderClass="borderClass"></card>
     </div>
     <div class="card-deck mb-3 text-center">
-        <card v-bind:printMode="printMode" v-bind:resetTrigger="resetTrigger"></card>
-        <card v-bind:printMode="printMode" v-bind:resetTrigger="resetTrigger"></card>
+      <card v-bind:printMode="printMode" v-bind:resetTrigger="resetTrigger" v-bind:borderClass="borderClass"></card>
+      <card v-bind:printMode="printMode" v-bind:resetTrigger="resetTrigger" v-bind:borderClass="borderClass"></card>
     </div>
-    <div class="text-center">
-      <b-button v-if="!printMode" v-on:click="print" variant="danger">Print</b-button>
-      <b-button v-if="!printMode" v-on:click="resetAll" variant="light">Reset</b-button>
+    <div v-if="!printMode" class="mb-2">
+      <div class="text-center">
+        <color-selector color="bg-primary" @change-color="onChangeColor"></color-selector>
+        <color-selector color="bg-secondary" @change-color="onChangeColor"></color-selector>
+        <color-selector color="bg-success" @change-color="onChangeColor"></color-selector>
+        <color-selector color="bg-danger" @change-color="onChangeColor"></color-selector>
+        <color-selector color="bg-warning" @change-color="onChangeColor"></color-selector>
+        <color-selector color="bg-info" @change-color="onChangeColor"></color-selector>
+        <color-selector color="bg-light" @change-color="onChangeColor"></color-selector>
+        <color-selector color="bg-dark" @change-color="onChangeColor"></color-selector>
+      </div>
+    </div>
+    <div v-if="!printMode" class="text-center">
+      <b-button v-on:click="print" variant="danger">Print</b-button>
+      <b-button v-on:click="resetAll" variant="light">Reset</b-button>
     </div>
   </div>
 </template>
 
 <script>
 import Card from './Card'
+import ColorSelector from './ColorSelector'
 
 export default {
   name: 'IndexPage',
   components: {
-    'card': Card
+    'card': Card,
+    'color-selector': ColorSelector
   },
   data () {
     return {
       printMode: false,
-      resetTrigger: false
+      resetTrigger: false,
+      borderClass: 'border-primary'
     }
   },
   methods: {
@@ -38,6 +53,11 @@ export default {
     },
     resetAll: function(event) {
       this.resetTrigger = !this.resetTrigger
+    },
+    onChangeColor: function(color) {
+      console.log('border-' + color.split('-')[1])
+
+      this.borderClass = 'border-' + color.split('-')[1]
     }
   },
   mounted() {

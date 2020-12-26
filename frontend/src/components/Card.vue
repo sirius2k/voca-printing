@@ -1,27 +1,44 @@
 <template lang="html">
   <div class="card mb-4 shadow-sm">
-      <div class="card-header text-white bg-primary">
-          <h4 class="my-0 font-weight-normal">What is the meaning of the word?</h4>
-      </div>
-      <div class="card-body align-middle">
+      <div class="card-body card-body-ext rounded" v-bind:class="borderClass">
           <div v-if="printMode">
-            <h1 class="card-title card-title-ext">{{word}}</h1>
+            <div class="h-25 text-flip tag">
+              {{tag}}
+            </div>
+            <div class="h-75 text-flip">
+              <div class="card-title card-title-ext" v-resize-text="{ratio:0.8, minFontSize:'50px'}" v-html="htmlNewLine(word)"></div>
+            </div>
           </div>
           <div v-else>
-            <input v-model="word" class="form-control" type="text" placeholder="Input English Word"/>
+            <div class="mb-2">
+              <textarea v-model="word" class="form-control" placeholder="Input English Word"/>
+            </div>
+            <div>
+              <div class="row">
+                <div class="col-sm"></div>
+                <div class="col-sm"></div>
+                <div class="col-sm"><input v-model="tag" class="form-control" type="text" placeholder="Tag"/></div>
+              </div>
+            </div>
           </div>
       </div>
-      <hr class="mt-2 mb-3"/>
-      <div class="card-body">
+      <div class="divider"></div>
+      <div class="card-body card-body-ext rounded" v-bind:class="borderClass">
           <div v-if="printMode">
-            <h1 class="card-title card-title-ext text-flip">{{meaning}}</h1>
+            <div class="h-75" v-resize-text>
+              <div class="card-title card-title-ext" v-resize-text="{ratio:0.8, minFontSize:'50px'}" v-html="htmlNewLine(meaning)"></div>
+            </div>
+            <div class="h-25 tag">
+              {{tag}}
+            </div>
           </div>
           <div v-else>
-            <input v-model="meaning" class="form-control" type="text" placeholder="Input the meaning of word"/>
+            <div class="mb-2">
+              <textarea v-model="meaning" class="form-control" placeholder="Input the meaning of word"/>
+            </div>
+            <div>
+            </div>
           </div>
-      </div>
-      <div class="card-header text-white text-flip bg-primary">
-          <h4 class="my-0 font-weight-normal">What is the word in English?</h4>
       </div>
   </div>
 </template>
@@ -31,18 +48,22 @@ export default {
   name: 'Card',
   props: {
     printMode: Boolean,
-    resetTrigger: Boolean
+    resetTrigger: Boolean,
+    borderClass: String
   },
   data () {
     return {
       word: '',
-      meaning: ''
+      meaning: '',
+      tag: ''
     }
   },
   methods: {
     resetAll() {
       this.word = ''
       this.meaning = ''
+      this.tag = ''
+      this.$props.borderClass = 'border-primary'
     }
   },
   watch: {
@@ -58,8 +79,12 @@ export default {
     min-width: 220px;
   }
 
+  .card-body-ext {
+    border: 10px solid;
+  }
+
   .card-title-ext {
-    font-size: 4em;
+    font-weight: bold;
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -68,5 +93,14 @@ export default {
 
   .text-flip {
     transform: scale(-1, -1);
+  }
+
+  .tag {
+    font-size: 1em;
+    text-align: right;
+  }
+
+  .divider {
+    height: 1px;
   }
   </style>
