@@ -6,9 +6,20 @@ import router from './router'
 import {BootstrapVue, IconsPlugin} from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
+import VueResizeText from 'vue-resize-text'
+
+const MyPlugin = {
+  install(Vue, options) {
+    Vue.prototype.htmlNewLine = (html) => {
+      return html.replace(/(?:\r\n|\r|\n)/g, '<br>')
+    }
+  }
+}
 
 Vue.use(BootstrapVue)
 Vue.use(IconsPlugin)
+Vue.use(MyPlugin)
+Vue.use(VueResizeText)
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
